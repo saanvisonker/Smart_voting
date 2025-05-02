@@ -66,9 +66,21 @@ while True:
         cv2.rectangle(frame, (x, y), (x+w, y+h), (50, 50, 255), 1)
         attendance = [output[0], timestamp]
 
-    imgBackground[370:370 + 480, 225:225 + 640] = frame
-    cv2.imshow('frame', imgBackground)
-    cv2.imshow('frame', imgBackground)
+    # Camera frame placement coordinates (adjust as needed to fit the black rectangle)
+    x_offset = 90
+    y_offset = 240
+    frame_width = 600
+    frame_height = 580
+
+# Resize the frame to match background slot size
+    resized_frame = cv2.resize(frame, (frame_width, frame_height))
+
+# Overlay the resized frame onto the background
+    imgBackground[y_offset:y_offset+frame_height, x_offset:x_offset+frame_width] = resized_frame
+
+# Show the combined frame
+    cv2.imshow('Smart Voting System', imgBackground)
+
     k = cv2.waitKey(1)
        
     if output is not None:
